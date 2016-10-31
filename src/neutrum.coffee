@@ -1,27 +1,41 @@
 
-class Neutrumator
+class Neutrominator
 
   tagNames = ['h1','h2','h3','h4','h5','p']
 
+
   constructor: ->
-    console.log('Neutrumator geladen')
+    console.log('Neutrominator geladen')
 
   cleanText: ->
     for tagName in tagNames
       if document.getElementsByTagName(tagName).length > 0
         for element in document.getElementsByTagName(tagName)
-          @removeStupidityFrom element
+          @parseAndRewrite element
 
-  removeStupidityFrom: (content) ->
-    while content.innerText.match(/\*innen/)
-      content.innerText = content.innerText.replace(/\*innen/,"Innen")
-    while content.innerText.match(/_innen/)
-      content.innerText = content.innerText.replace(/_innen/,"Innen")
-    while content.innerText.match(/\*in /)
-      content.innerText = content.innerText.replace(/\*in /," ")
-    while content.innerText.match(/\*n /)
-      content.innerText = content.innerText.replace(/\*n /,"n ")
+  parseAndRewrite: (content) ->
+    @replaceIt content, /\*innen/, "Innen"
+    @replaceIt content, /\_innen/, "Innen"
+    @defaultRewrite content
 
-window.cleaner = new Neutrumator()
+  parseAndRewriteStrict: (content) ->
+    @replaceIt content, /or\*innen/, "oren"
+    @replaceIt content, /er\*innen/, "er"
+    @defaultRewrite content
+
+  defaultRewrite: (content) ->
+    @replaceIt(content, /\*in /, " ")
+    @replaceIt(content, /\*n /, "n ")
+    @replaceIt(content, /Studierenden/, "Studenten")
+    @replaceIt(content, /Studierende/, "Studentin")
+    @replaceIt(content, /Studierender/, "Student")
+
+  replaceIt: (haystack, needle, term) ->
+    while haystack.innerText.match(needle)
+      haystack.innerText = haystack.innerText.replace(needle,term)
+
+window.cleanser = new Neutrominator()
 window.onload = ->
-  window.cleaner.cleanText()
+  window.cleanser.cleanText()
+
+module.exports = Neutrominator
