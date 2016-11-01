@@ -20,7 +20,9 @@ compiles the .coffee files and moves them into the dist folder
 
 #### Tests
 
-Test files are found in `./tests` and can be executed 
+Test files are found in `./tests` and can be executed by running
+
+    npm test
 
 
 ### Common errors
