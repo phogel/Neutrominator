@@ -4,7 +4,7 @@ class Neutrominator
   tagNames = ['h1','h2','h3','h4','h5','p']
 
   constructor: (@doStrict = true) ->
-    console.log 'workit baby, ' + @doStrict
+    #console.log 'workit baby, ' + @doStrict
 
   cleanText: ->
     for tagName in tagNames
