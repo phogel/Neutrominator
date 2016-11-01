@@ -4,7 +4,7 @@
   "description": "Browser extension to cleanse words from gender-bias",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --single-run",
-    "compile": "webpack"
+    "compile": "webpack && coffee -o dist -c src/popup.coffee"
   },
   "author": "Dominique Klevinghaus",
   "license": "ISC",
