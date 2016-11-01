@@ -70,7 +70,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  function Neutrominator(doStrict) {
 	    this.doStrict = doStrict != null ? doStrict : true;
-	    console.log('workit baby, ' + this.doStrict);
 	  }
 
 	  Neutrominator.prototype.cleanText = function() {
@@ -131,7 +130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Neutrominator.prototype.replaceIt = function(haystack, needle, term) {
-	    return haystack.textContent = haystack.textContent.replace(needle, term);
+	    return haystack.innerHTML = haystack.innerHTML.replace(needle, term);
 	  };
 
 	  return Neutrominator;

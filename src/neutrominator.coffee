@@ -43,6 +43,6 @@ class Neutrominator
     @replaceIt(content, /Studierender/g, "Student")
 
   replaceIt: (haystack, needle, term) ->
-   haystack.textContent = haystack.textContent.replace needle,term
+   haystack.innerHTML = haystack.innerHTML.replace needle,term
 
 module.exports = Neutrominator

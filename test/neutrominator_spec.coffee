@@ -4,7 +4,7 @@ describe 'Neutrominator', ->
 
   cleanser = null
   element =
-    textContent: 'nothing' 
+    innerHTML: 'nothing' 
 
   beforeEach ->
     cleanser = new Neutrominator()
@@ -19,64 +19,64 @@ describe 'Neutrominator', ->
 
   describe 'replaceIt', ->
     
-    it 'replaces element.textContent with given term', ->
-      element.textContent = '01234'
+    it 'replaces element.innerHTML with given term', ->
+      element.innerHTML = '01234'
       cleanser.replaceIt element, /123/, "321"
-      expect(element.textContent).toEqual '03214'
+      expect(element.innerHTML).toEqual '03214'
 
     it 'replaces all occurences of term', ->
-      element.textContent = '01234 and 41230'
+      element.innerHTML = '01234 and 41230'
       cleanser.replaceIt element, /123/g, "321"
-      expect(element.textContent).toEqual '03214 and 43210'
+      expect(element.innerHTML).toEqual '03214 and 43210'
     
   describe 'parseAndRewrite', ->
 
     it 'replaces *innen and _innen with Innen', ->
-      element.textContent = 'Ros*innen Alter_innen'
+      element.innerHTML = 'Ros*innen Alter_innen'
       cleanser.parseAndRewrite element
-      expect(element.textContent).toEqual 'RosInnen AlterInnen'
+      expect(element.innerHTML).toEqual 'RosInnen AlterInnen'
 
   describe 'parseAndRewriteStrict', ->
     
     it 'removes *innen and _innen', ->
-      element.textContent = 'Ros*innen'
+      element.innerHTML = 'Ros*innen'
       cleanser.parseAndRewriteStrict element
-      expect(element.textContent).toEqual 'Ros'
+      expect(element.innerHTML).toEqual 'Ros'
 
     it 'creates correct form for Autor*innen', ->
-      element.textContent = 'Autor*innen'
+      element.innerHTML = 'Autor*innen'
       cleanser.parseAndRewriteStrict element
-      expect(element.textContent).toEqual 'Autoren'
+      expect(element.innerHTML).toEqual 'Autoren'
 
     it 'creates correct form for Autor_innen', ->
-      element.textContent = 'Autor_innen'
+      element.innerHTML = 'Autor_innen'
       cleanser.parseAndRewriteStrict element
-      expect(element.textContent).toEqual 'Autoren'
+      expect(element.innerHTML).toEqual 'Autoren'
 
     it 'creates correct form for Spieler*innen', ->
-      element.textContent = 'Spieler*innen'
+      element.innerHTML = 'Spieler*innen'
       cleanser.parseAndRewriteStrict element
-      expect(element.textContent).toEqual 'Spieler'
+      expect(element.innerHTML).toEqual 'Spieler'
 
     it 'creates correct dative form when den article is used', ->
-      element.textContent = 'Ruhm den Spieler*innen'
+      element.innerHTML = 'Ruhm den Spieler*innen'
       cleanser.parseAndRewriteStrict element
-      expect(element.textContent).toEqual 'Ruhm den Spielern'
+      expect(element.innerHTML).toEqual 'Ruhm den Spielern'
 
     it 'creates correct dative form for Autor_innen', ->
-      element.textContent = 'Ruhm den Autor_innen'
+      element.innerHTML = 'Ruhm den Autor_innen'
       cleanser.parseAndRewriteStrict element
-      expect(element.textContent).toEqual 'Ruhm den Autoren'
+      expect(element.innerHTML).toEqual 'Ruhm den Autoren'
 
     it 'creates correct form for Schwed_innen', ->
-      element.textContent = 'Ruhm den Schwed_innen'
+      element.innerHTML = 'Ruhm den Schwed_innen'
       cleanser.parseAndRewriteStrict element
-      expect(element.textContent).toEqual 'Ruhm den Autoren'
+      expect(element.innerHTML).toEqual 'Ruhm den Autoren'
 
     it 'creates correct form for Finalist*innen', ->
-      element.textContent = 'Ruhm den Finalist*innen'
+      element.innerHTML = 'Ruhm den Finalist*innen'
       cleanser.parseAndRewriteStrict element
-      expect(element.textContent).toEqual 'Ruhm den Finalisten'
+      expect(element.innerHTML).toEqual 'Ruhm den Finalisten'
 
 
 
