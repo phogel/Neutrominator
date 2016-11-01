@@ -52,6 +52,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(1);
+
+
+/***/ },
+/* 1 */
 /***/ function(module, exports) {
 
 	var Neutrominator;
@@ -61,8 +68,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  tagNames = ['h1', 'h2', 'h3', 'h4', 'h5', 'p'];
 
-	  function Neutrominator() {
-	    console.log('Neutrumator geladen');
+	  function Neutrominator(doStrict) {
+	    this.doStrict = doStrict != null ? doStrict : true;
+	    console.log('workit baby, ' + this.doStrict);
 	  }
 
 	  Neutrominator.prototype.cleanText = function() {
@@ -77,7 +85,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          results1 = [];
 	          for (j = 0, len1 = ref.length; j < len1; j++) {
 	            element = ref[j];
-	            results1.push(this.parseAndRewrite(element));
+	            if (this.doStrict) {
+	              results1.push(this.parseAndRewriteStrict(element));
+	            } else {
+	              results1.push(this.parseAndRewrite(element));
+	            }
 	          }
 	          return results1;
 	        }).call(this));
@@ -89,33 +101,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Neutrominator.prototype.parseAndRewrite = function(content) {
-	    this.replaceIt(content, /\*innen/, "Innen");
-	    this.replaceIt(content, /\_innen/, "Innen");
-	    this.replaceIt(content, /\*in /, " ");
-	    this.replaceIt(content, /\*n /, "n ");
-	    this.replaceIt(content, /Studierenden/, "Studenten");
-	    this.replaceIt(content, /Studierende/, "Studentin");
-	    return this.replaceIt(content, /Studierender/, "Student");
+	    this.replaceIt(content, /\*innen/g, "Innen");
+	    this.replaceIt(content, /\_innen/g, "Innen");
+	    return this.defaultRewrite(content);
+	  };
+
+	  Neutrominator.prototype.parseAndRewriteStrict = function(content) {
+	    this.replaceIt(content, /en ([a-zA-Z]*)er\*innen/g, "en $1ern");
+	    this.replaceIt(content, /en ([a-zA-Z]*)er_innen/g, "en $1ern");
+	    this.replaceIt(content, /or\*innen/g, "oren");
+	    this.replaceIt(content, /er\*innen/g, "er");
+	    this.replaceIt(content, /t\*innen/g, "ten");
+	    this.replaceIt(content, /or_innen/g, "oren");
+	    this.replaceIt(content, /er_innen/g, "er");
+	    this.replaceIt(content, /t\_innen/g, "ten");
+	    this.replaceIt(content, /\*innen/g, "");
+	    this.replaceIt(content, /_innen/g, "");
+	    return this.defaultRewrite(content);
+	  };
+
+	  Neutrominator.prototype.defaultRewrite = function(content) {
+	    this.replaceIt(content, /\*in /g, " ");
+	    this.replaceIt(content, /\_in /g, " ");
+	    this.replaceIt(content, /\*n /g, "n ");
+	    this.replaceIt(content, /\_n /g, "n ");
+	    this.replaceIt(content, /Studierenden/g, "Studenten");
+	    this.replaceIt(content, /Studierende/g, "Studentin");
+	    return this.replaceIt(content, /Studierender/g, "Student");
 	  };
 
 	  Neutrominator.prototype.replaceIt = function(haystack, needle, term) {
-	    var results;
-	    results = [];
-	    while (haystack.innerText.match(needle)) {
-	      results.push(haystack.innerText = haystack.innerText.replace(needle, term));
-	    }
-	    return results;
+	    return haystack.textContent = haystack.textContent.replace(needle, term);
 	  };
 
 	  return Neutrominator;
 
 	})();
 
-	window.cleanser = new Neutrominator();
-
-	window.onload = function() {
-	  return window.cleanser.cleanText();
-	};
+	module.exports = Neutrominator;
 
 
 /***/ }
