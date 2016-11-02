@@ -2,6 +2,8 @@
 class Neutrominator
 
   tagNames = ['h1','h2','h3','h4','h5','p']
+  languagePrefixes = ['Pol','Russ','Schwed','Finn','Dän','Lett','Türk','Portugies']
+  haystack = null
 
   constructor: (@doStrict = true) ->
     #console.log 'workit baby, ' + @doStrict
@@ -10,39 +12,34 @@ class Neutrominator
     for tagName in tagNames
       if document.getElementsByTagName(tagName).length > 0
         for element in document.getElementsByTagName(tagName)
+          @haystack = element
           if @doStrict
-            @parseAndRewriteStrict element
+            @parseAndRewriteStrict()
           else
-            @parseAndRewrite element
+            @parseAndRewrite()
 
-  parseAndRewrite: (content) ->
-    @replaceIt content, /\*innen/g, "Innen"
-    @replaceIt content, /\_innen/g, "Innen"
-    @defaultRewrite content
+  parseAndRewrite: ->
+    @replaceIt /[\*_]innen/g, "Innen"
+    @defaultRewrite()
 
-  parseAndRewriteStrict: (content) ->
-    @replaceIt content, /en ([a-zA-Z]*)er\*innen/g, "en $1ern"
-    @replaceIt content, /en ([a-zA-Z]*)er_innen/g, "en $1ern"
-    @replaceIt content, /or\*innen/g, "oren"
-    @replaceIt content, /er\*innen/g, "er"
-    @replaceIt content, /t\*innen/g, "ten"
-    @replaceIt content, /or_innen/g, "oren"
-    @replaceIt content, /er_innen/g, "er"
-    @replaceIt content, /t\_innen/g, "ten"
-    @replaceIt content, /\*innen/g, ""
-    @replaceIt content, /_innen/g, ""
-    @defaultRewrite content
+  parseAndRewriteStrict: ->
+    for lang in languagePrefixes
+      @replaceIt new RegExp( lang + "[\*_]innen", "g" ), lang + "en"
+    @replaceIt /en ([a-zA-Z]*)er[\*_]innen/g, "en $1ern"
+    @replaceIt /or[\*_]innen/g, "oren"
+    @replaceIt /er[\*_]innen/g, "er"
+    @replaceIt /t[\*_]innen/g, "ten"
+    @replaceIt /[\*_]innen/g, ""
+    @defaultRewrite()
 
-  defaultRewrite: (content) ->
-    @replaceIt(content, /\*in /g, " ")
-    @replaceIt(content, /\_in /g, " ")
-    @replaceIt(content, /\*n /g, "n ")
-    @replaceIt(content, /\_n /g, "n ")
-    @replaceIt(content, /Studierenden/g, "Studenten")
-    @replaceIt(content, /Studierende/g, "Studentin")
-    @replaceIt(content, /Studierender/g, "Student")
+  defaultRewrite: () ->
+    @replaceIt /[\*_]in /g, " "
+    @replaceIt /[\*_]n /g, "n "
+    @replaceIt /Studierenden/g, "Studenten"
+    @replaceIt /Studierende/g, "Studentin"
+    @replaceIt /Studierender/g, "Student"
 
-  replaceIt: (haystack, needle, term) ->
-   haystack.innerHTML = haystack.innerHTML.replace needle,term
+  replaceIt: (needle, term) ->
+    @haystack.innerHTML = @haystack.innerHTML.replace needle,term
 
 module.exports = Neutrominator
