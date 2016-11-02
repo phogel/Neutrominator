@@ -64,9 +64,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Neutrominator;
 
 	Neutrominator = (function() {
-	  var tagNames;
+	  var haystack, languagePrefixes, tagNames;
 
 	  tagNames = ['h1', 'h2', 'h3', 'h4', 'h5', 'p'];
+
+	  languagePrefixes = ['Pol', 'Russ', 'Schwed', 'Finn', 'Dän', 'Lett', 'Türk', 'Portugies'];
+
+	  haystack = null;
 
 	  function Neutrominator(doStrict) {
 	    this.doStrict = doStrict != null ? doStrict : true;
@@ -84,10 +88,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          results1 = [];
 	          for (j = 0, len1 = ref.length; j < len1; j++) {
 	            element = ref[j];
+	            this.haystack = element;
 	            if (this.doStrict) {
-	              results1.push(this.parseAndRewriteStrict(element));
+	              results1.push(this.parseAndRewriteStrict());
 	            } else {
-	              results1.push(this.parseAndRewrite(element));
+	              results1.push(this.parseAndRewrite());
 	            }
 	          }
 	          return results1;
@@ -99,38 +104,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return results;
 	  };
 
-	  Neutrominator.prototype.parseAndRewrite = function(content) {
-	    this.replaceIt(content, /\*innen/g, "Innen");
-	    this.replaceIt(content, /\_innen/g, "Innen");
-	    return this.defaultRewrite(content);
+	  Neutrominator.prototype.parseAndRewrite = function() {
+	    this.replaceIt(/[\*_]innen/g, "Innen");
+	    return this.defaultRewrite();
 	  };
 
-	  Neutrominator.prototype.parseAndRewriteStrict = function(content) {
-	    this.replaceIt(content, /en ([a-zA-Z]*)er\*innen/g, "en $1ern");
-	    this.replaceIt(content, /en ([a-zA-Z]*)er_innen/g, "en $1ern");
-	    this.replaceIt(content, /or\*innen/g, "oren");
-	    this.replaceIt(content, /er\*innen/g, "er");
-	    this.replaceIt(content, /t\*innen/g, "ten");
-	    this.replaceIt(content, /or_innen/g, "oren");
-	    this.replaceIt(content, /er_innen/g, "er");
-	    this.replaceIt(content, /t\_innen/g, "ten");
-	    this.replaceIt(content, /\*innen/g, "");
-	    this.replaceIt(content, /_innen/g, "");
-	    return this.defaultRewrite(content);
+	  Neutrominator.prototype.parseAndRewriteStrict = function() {
+	    var i, lang, len;
+	    for (i = 0, len = languagePrefixes.length; i < len; i++) {
+	      lang = languagePrefixes[i];
+	      this.replaceIt(new RegExp(lang + "[\*_]innen", "g"), lang + "en");
+	    }
+	    this.replaceIt(/en ([a-zA-Z]*)er[\*_]innen/g, "en $1ern");
+	    this.replaceIt(/or[\*_]innen/g, "oren");
+	    this.replaceIt(/er[\*_]innen/g, "er");
+	    this.replaceIt(/t[\*_]innen/g, "ten");
+	    this.replaceIt(/[\*_]innen/g, "");
+	    return this.defaultRewrite();
 	  };
 
-	  Neutrominator.prototype.defaultRewrite = function(content) {
-	    this.replaceIt(content, /\*in /g, " ");
-	    this.replaceIt(content, /\_in /g, " ");
-	    this.replaceIt(content, /\*n /g, "n ");
-	    this.replaceIt(content, /\_n /g, "n ");
-	    this.replaceIt(content, /Studierenden/g, "Studenten");
-	    this.replaceIt(content, /Studierende/g, "Studentin");
-	    return this.replaceIt(content, /Studierender/g, "Student");
+	  Neutrominator.prototype.defaultRewrite = function() {
+	    this.replaceIt(/[\*_]in /g, " ");
+	    this.replaceIt(/[\*_]n /g, "n ");
+	    this.replaceIt(/Studierenden/g, "Studenten");
+	    this.replaceIt(/Studierende/g, "Studentin");
+	    return this.replaceIt(/Studierender/g, "Student");
 	  };
 
-	  Neutrominator.prototype.replaceIt = function(haystack, needle, term) {
-	    return haystack.innerHTML = haystack.innerHTML.replace(needle, term);
+	  Neutrominator.prototype.replaceIt = function(needle, term) {
+	    return this.haystack.innerHTML = this.haystack.innerHTML.replace(needle, term);
 	  };
 
 	  return Neutrominator;
