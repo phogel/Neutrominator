@@ -33,8 +33,8 @@ class Neutrominator
     @defaultRewrite()
 
   defaultRewrite: () ->
-    @replaceIt /[\*_]in /g, " "
-    @replaceIt /[\*_]n /g, "n "
+    @replaceIt /[\*_]in([ ,.])/g, "$1"
+    @replaceIt /[\*_]n([ ,.])/g, "n$1"
     @replaceIt /Studierenden/g, "Studenten"
     @replaceIt /Studierende/g, "Studentin"
     @replaceIt /Studierender/g, "Student"
