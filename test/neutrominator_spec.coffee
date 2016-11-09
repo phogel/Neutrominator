@@ -80,5 +80,21 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Ruhm den Finalisten'
 
+    it 'creates correct Verleger*in', ->
+      element.innerHTML = 'Verleger*in '
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Verleger '
+
+      element.innerHTML = 'Suppenterr*ine'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Suppenterr*ine'
+
+      element.innerHTML = 'Verleger*in.'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Verleger.'
+
+      element.innerHTML = 'Verleger*in,'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Verleger,'
 
 

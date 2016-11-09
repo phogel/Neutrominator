@@ -124,8 +124,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Neutrominator.prototype.defaultRewrite = function() {
-	    this.replaceIt(/[\*_]in /g, " ");
-	    this.replaceIt(/[\*_]n /g, "n ");
+	    this.replaceIt(/[\*_]in([ ,.])/g, "$1");
+	    this.replaceIt(/[\*_]n([ ,.])/g, "n$1");
 	    this.replaceIt(/Studierenden/g, "Studenten");
 	    this.replaceIt(/Studierende/g, "Studentin");
 	    return this.replaceIt(/Studierender/g, "Student");
