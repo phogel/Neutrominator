@@ -120,6 +120,16 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'den meisten Buchhaltern und Sekretären'
 
+    it 'creates correct Helfer', ->
+      element.innerHTML = 'kamen Helfer*innen von'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'kamen Helfer von'
+
+    it 'creates correct Helfer', ->
+      element.innerHTML = 'ihren Chef*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'ihren Chefs'
+
     it 'creates correct Verleger*in', ->
       element.innerHTML = 'Verleger*in '
       cleanser.parseAndRewriteStrict()

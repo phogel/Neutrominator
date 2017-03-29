@@ -28,13 +28,13 @@ class Neutrominator
     @replaceIt /den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "den $1en $2ern"
     @replaceIt /den ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "den $1en $2ren"
     @replaceIt /die ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "die $1en $2er"
-    @replaceIt /en ([a-zA-Z]*)er[\*_]innen/g, "en $1ern"
-    @replaceIt /en ([a-zA-Z]*)er[\*_]innen/g, "en $1er"
+    @replaceIt /den ([a-zA-Z]*)er[\*_]innen/g, "den $1ern"
     @replaceIt /or[\*_]innen/g, "oren"
     @replaceIt /er[\*_]innen/g, "er"
     @replaceIt /t[\*_]innen/g, "ten"
     @replaceIt /d[\*_]innen/g, "den"
     @replaceIt /r[\*_]innen/g, "re"
+    @replaceIt /f[\*_]innen/g, "fs"
     @replaceIt /[\*_]innen/g, ""
     @defaultRewrite()
 
