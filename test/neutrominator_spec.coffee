@@ -41,9 +41,9 @@ describe 'Neutrominator', ->
   describe 'parseAndRewriteStrict', ->
     
     it 'removes *innen and _innen', ->
-      element.innerHTML = 'Röstzwiebl*innen dr_innen'
+      element.innerHTML = 'Röstzwiebl*innen'
       cleanser.parseAndRewriteStrict()
-      expect(element.innerHTML).toEqual 'Röstzwiebl dr'
+      expect(element.innerHTML).toEqual 'Röstzwiebl'
 
     it 'creates correct form for Autor*innen', ->
       element.innerHTML = 'Autor*innen'
@@ -79,6 +79,46 @@ describe 'Neutrominator', ->
       element.innerHTML = 'Ruhm den Finalist*innen'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Ruhm den Finalisten'
+
+    it 'creates correct form for Kund*innen', ->
+      element.innerHTML = 'Kund*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Kunden'
+
+    it 'creates correct form for Sekretär*innen', ->
+      element.innerHTML = 'Sekretär*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Sekretäre'
+
+    it 'creates correct form for Programmierer*innen', ->
+      element.innerHTML = 'Programmierer*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Programmierer'
+
+    it 'creates correct Dativ for den Programmierer*innen', ->
+      element.innerHTML = 'den Programmierer*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'den Programmierern'
+
+    it 'creates correct form for Buchhalter*innen', ->
+      element.innerHTML = 'Buchhalter*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Buchhalter'
+
+    it 'creates correct dativ form for "den meisten Buchhalter*innen"', ->
+      element.innerHTML = 'den meisten Buchhalter*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'den meisten Buchhaltern'
+
+    it 'creates correct Nominativ for "die meisten Buchhalter*innen"', ->
+      element.innerHTML = 'die meisten Buchhalter*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'die meisten Buchhalter'
+
+    it 'creates correct Dativ for "den meisten Buchhalter*innen und Sekretär*innen"', ->
+      element.innerHTML = 'den meisten Buchhalter*innen und Sekretär*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'den meisten Buchhaltern und Sekretären'
 
     it 'creates correct Verleger*in', ->
       element.innerHTML = 'Verleger*in '
