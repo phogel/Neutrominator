@@ -25,10 +25,16 @@ class Neutrominator
   parseAndRewriteStrict: ->
     for lang in languagePrefixes
       @replaceIt new RegExp( lang + "[\*_]innen", "g" ), lang + "en"
+    @replaceIt /den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "den $1en $2ern"
+    @replaceIt /den ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "den $1en $2ren"
+    @replaceIt /die ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "die $1en $2er"
     @replaceIt /en ([a-zA-Z]*)er[\*_]innen/g, "en $1ern"
+    @replaceIt /en ([a-zA-Z]*)er[\*_]innen/g, "en $1er"
     @replaceIt /or[\*_]innen/g, "oren"
     @replaceIt /er[\*_]innen/g, "er"
     @replaceIt /t[\*_]innen/g, "ten"
+    @replaceIt /d[\*_]innen/g, "den"
+    @replaceIt /r[\*_]innen/g, "re"
     @replaceIt /[\*_]innen/g, ""
     @defaultRewrite()
 
@@ -41,5 +47,12 @@ class Neutrominator
 
   replaceIt: (needle, term) ->
     @haystack.innerHTML = @haystack.innerHTML.replace needle,term
+
+  getDativ: (noun) ->
+    noun = noun.replace /ler[\*_]innen/g, "lern"
+    noun = noun.replace /er[\*_]innen/g, "ern"
+    noun = noun.replace /r[\*_]innen/g, "rn"
+    noun = noun.replace /[\*_]innen/g, "n"
+    noun
 
 module.exports = Neutrominator
