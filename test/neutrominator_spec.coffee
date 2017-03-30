@@ -105,6 +105,11 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Buchhalter'
 
+    it 'creates correct form for Kolleg*innen', ->
+      element.innerHTML = 'Kolleg*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Kollegen'
+
     it 'creates correct dativ form for "den meisten Buchhalter*innen"', ->
       element.innerHTML = 'den meisten Buchhalter*innen'
       cleanser.parseAndRewriteStrict()
@@ -125,7 +130,7 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'kamen Helfer von'
 
-    it 'creates correct Helfer', ->
+    it 'creates correct Chefs', ->
       element.innerHTML = 'ihren Chef*innen'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'ihren Chefs'
