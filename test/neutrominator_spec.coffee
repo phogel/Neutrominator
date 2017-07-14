@@ -134,6 +134,15 @@ describe 'Neutrominator', ->
       element.innerHTML = 'ihren Chef*innen'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'ihren Chefs'
+    it 'creates correct Zuschauersitzen', ->
+      element.innerHTML = 'in den gepolsterten Zuschauer*innensitzen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'in den gepolsterten Zuschauersitzen'
+
+    it 'creates correct die künstlerischen Leiter', ->
+      element.innerHTML = 'Danach stehen die künstlerischen Leiter*innen von Bühnenbild, Kostümen, Musik, Video etc., die an ihre Assistent*innen delegieren, die wiederum mit den Hospitant*innen kommunizieren.'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Danach stehen die künstlerischen Leiter von Bühnenbild, Kostümen, Musik, Video etc., die an ihre Assistenten delegieren, die wiederum mit den Hospitanten kommunizieren.'
 
     it 'creates correct Verleger*in', ->
       element.innerHTML = 'Verleger*in '
@@ -151,5 +160,16 @@ describe 'Neutrominator', ->
       element.innerHTML = 'Verleger*in,'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Verleger,'
+
+    it 'creates correct eine*r', ->
+      element.innerHTML = 'Was wäre, wenn in der Kulturbranche eine*r mehr unbezahlte Praktika machen würde?'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Was wäre, wenn in der Kulturbranche einer mehr unbezahlte Praktika machen würde?'
+
+      element.innerHTML = 'Was wäre, wenn in der Kulturbranche eine*r. mehr unbezahlte Praktika machen würde?'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Was wäre, wenn in der Kulturbranche einer. mehr unbezahlte Praktika machen würde?'
+
+
 
 

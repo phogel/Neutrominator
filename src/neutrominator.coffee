@@ -25,6 +25,7 @@ class Neutrominator
   parseAndRewriteStrict: ->
     for lang in languagePrefixes
       @replaceIt new RegExp( lang + "[\*_]innen", "g" ), lang + "en"
+    @replaceIt /den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen([a-z])/g, "den $1en $2er$3"
     @replaceIt /den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "den $1en $2ern"
     @replaceIt /den ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "den $1en $2ren"
     @replaceIt /die ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "die $1en $2er"
@@ -35,6 +36,7 @@ class Neutrominator
     @replaceIt /r[\*_]innen/g, "re"
     @replaceIt /f[\*_]innen/g, "fs"
     @replaceIt /[\*_]innen/g, ""
+    @replaceIt /e[\*_]r/g, "er"
     @defaultRewrite()
 
   defaultRewrite: () ->
