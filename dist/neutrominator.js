@@ -115,17 +115,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      lang = languagePrefixes[i];
 	      this.replaceIt(new RegExp(lang + "[\*_]innen", "g"), lang + "en");
 	    }
+	    this.replaceIt(/den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen([a-z])/g, "den $1en $2er$3");
 	    this.replaceIt(/den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "den $1en $2ern");
 	    this.replaceIt(/den ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "den $1en $2ren");
 	    this.replaceIt(/die ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "die $1en $2er");
-	    this.replaceIt(/en ([a-zA-Z]*)er[\*_]innen/g, "en $1ern");
-	    this.replaceIt(/en ([a-zA-Z]*)er[\*_]innen/g, "en $1er");
+	    this.replaceIt(/den ([a-zA-Z]*)er[\*_]innen/g, "den $1ern");
 	    this.replaceIt(/or[\*_]innen/g, "oren");
 	    this.replaceIt(/er[\*_]innen/g, "er");
-	    this.replaceIt(/t[\*_]innen/g, "ten");
-	    this.replaceIt(/d[\*_]innen/g, "den");
+	    this.replaceIt(/([gtd])[\*_]innen/g, "$1en");
 	    this.replaceIt(/r[\*_]innen/g, "re");
+	    this.replaceIt(/f[\*_]innen/g, "fs");
 	    this.replaceIt(/[\*_]innen/g, "");
+	    this.replaceIt(/e[\*_]r/g, "er");
 	    return this.defaultRewrite();
 	  };
 
