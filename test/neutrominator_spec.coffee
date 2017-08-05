@@ -95,10 +95,10 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Programmierer'
 
-    it 'creates correct Dativ for den Programmierer*innen', ->
-      element.innerHTML = 'den Programmierer*innen'
+    it 'creates correct Dativ for Den Programmierer*innen', ->
+      element.innerHTML = 'Den Programmierer*innen'
       cleanser.parseAndRewriteStrict()
-      expect(element.innerHTML).toEqual 'den Programmierern'
+      expect(element.innerHTML).toEqual 'Den Programmierern'
 
     it 'creates correct form for Buchhalter*innen', ->
       element.innerHTML = 'Buchhalter*innen'
@@ -110,10 +110,10 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Kollegen'
 
-    it 'creates correct dativ form for "den meisten Buchhalter*innen"', ->
-      element.innerHTML = 'den meisten Buchhalter*innen'
+    it 'creates correct dativ form for " den meisten Buchhalter*innen"', ->
+      element.innerHTML = ' den meisten Buchhalter*innen'
       cleanser.parseAndRewriteStrict()
-      expect(element.innerHTML).toEqual 'den meisten Buchhaltern'
+      expect(element.innerHTML).toEqual ' den meisten Buchhaltern'
 
     it 'creates correct Nominativ for "die meisten Buchhalter*innen"', ->
       element.innerHTML = 'die meisten Buchhalter*innen'
@@ -121,9 +121,9 @@ describe 'Neutrominator', ->
       expect(element.innerHTML).toEqual 'die meisten Buchhalter'
 
     it 'creates correct Dativ for "den meisten Buchhalter*innen und Sekretär*innen"', ->
-      element.innerHTML = 'den meisten Buchhalter*innen und Sekretär*innen'
+      element.innerHTML = ' den meisten Buchhalter*innen und Sekretär*innen'
       cleanser.parseAndRewriteStrict()
-      expect(element.innerHTML).toEqual 'den meisten Buchhaltern und Sekretären'
+      expect(element.innerHTML).toEqual ' den meisten Buchhaltern und Sekretären'
 
     it 'creates correct Helfer', ->
       element.innerHTML = 'kamen Helfer*innen von'
@@ -134,10 +134,16 @@ describe 'Neutrominator', ->
       element.innerHTML = 'ihren Chef*innen'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'ihren Chefs'
+
     it 'creates correct Zuschauersitzen', ->
       element.innerHTML = 'in den gepolsterten Zuschauer*innensitzen'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'in den gepolsterten Zuschauersitzen'
+
+    it 'creates correct Zuschauersitzen', ->
+      element.innerHTML = 'Den gepolsterten Zuschauer*innensitzen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Den gepolsterten Zuschauersitzen'
 
     it 'creates correct die künstlerischen Leiter', ->
       element.innerHTML = 'Danach stehen die künstlerischen Leiter*innen von Bühnenbild, Kostümen, Musik, Video etc., die an ihre Assistent*innen delegieren, die wiederum mit den Hospitant*innen kommunizieren.'
@@ -170,6 +176,10 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Was wäre, wenn in der Kulturbranche einer. mehr unbezahlte Praktika machen würde?'
 
+    it 'creates correct Nominativ for combo Eingeladen waren Vertreter', ->
+      element.innerHTML = 'Eingeladen waren Vertreter*innen des Justizministeriums'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Eingeladen waren Vertreter des Justizministeriums'
 
 
 

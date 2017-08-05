@@ -115,11 +115,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      lang = languagePrefixes[i];
 	      this.replaceIt(new RegExp(lang + "[\*_]innen", "g"), lang + "en");
 	    }
-	    this.replaceIt(/den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen([a-z])/g, "den $1en $2er$3");
-	    this.replaceIt(/den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "den $1en $2ern");
-	    this.replaceIt(/den ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "den $1en $2ren");
+	    this.replaceIt(/(\sd|D)en ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen([a-z])/g, "$1en $2en $3er$4");
+	    this.replaceIt(/(\sd|D)en ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "$1en $2en $3ern");
+	    this.replaceIt(/(\sd|D)en ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "$1en $2en $3ren");
 	    this.replaceIt(/die ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "die $1en $2er");
-	    this.replaceIt(/den ([a-zA-Z]*)er[\*_]innen/g, "den $1ern");
+	    this.replaceIt(/(\sd|D)en ([a-zA-Z]*)er[\*_]innen/g, "$1en $2ern");
 	    this.replaceIt(/or[\*_]innen/g, "oren");
 	    this.replaceIt(/er[\*_]innen/g, "er");
 	    this.replaceIt(/([gtd])[\*_]innen/g, "$1en");

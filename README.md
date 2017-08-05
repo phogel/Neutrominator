@@ -16,7 +16,11 @@ The command
 
     npm run compile
 
-compiles the .coffee files and moves them into the dist folder. That folder can be zipped and uploaded to the Google Chrome App Store.
+compiles the .coffee files and moves them into the dist folder. To upload to Google App store:
+
+- increment the version number in `dist/manifest.json`
+- zip the contents of the dist folder
+- upload
 
 #### Tests
 
