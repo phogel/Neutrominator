@@ -22,7 +22,6 @@ compiles the .coffee files and moves them into the dist folder. To upload to Goo
 - zip the contents of the dist folder
 - upload
 
-
 #### Tests
 
 Test files are found in `./tests` and can be executed by running
