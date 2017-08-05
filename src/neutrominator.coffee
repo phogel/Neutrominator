@@ -25,11 +25,11 @@ class Neutrominator
   parseAndRewriteStrict: ->
     for lang in languagePrefixes
       @replaceIt new RegExp( lang + "[\*_]innen", "g" ), lang + "en"
-    @replaceIt /den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen([a-z])/g, "den $1en $2er$3"
-    @replaceIt /den ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "den $1en $2ern"
-    @replaceIt /den ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "den $1en $2ren"
+    @replaceIt /(\sd|D)en ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen([a-z])/g, "$1en $2en $3er$4"
+    @replaceIt /(\sd|D)en ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "$1en $2en $3ern"
+    @replaceIt /(\sd|D)en ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "$1en $2en $3ren"
     @replaceIt /die ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "die $1en $2er"
-    @replaceIt /den ([a-zA-Z]*)er[\*_]innen/g, "den $1ern"
+    @replaceIt /(\sd|D)en ([a-zA-Z]*)er[\*_]innen/g, "$1en $2ern"
     @replaceIt /or[\*_]innen/g, "oren"
     @replaceIt /er[\*_]innen/g, "er"
     @replaceIt /([gtd])[\*_]innen/g, "$1en"
