@@ -38,6 +38,37 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewrite()
       expect(element.innerHTML).toEqual 'RosInnen AlterInnen'
 
+    it 'removes die from die*derjenige', ->
+      element.innerHTML = 'wie die*derjenige'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'wie derjenige'
+
+    it 'removes Die from Die*derjenige', ->
+      element.innerHTML = 'wie die*derjenige'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'wie derjenige'
+
+    it 'removes Der from Der*diejenige', ->
+      element.innerHTML = 'Der*diejenige'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Derjenige'
+
+    it 'cleanses seine*ihre', ->
+      element.innerHTML = 'seine*ihre '
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'seine '
+
+    it 'cleanses ihre*seine', ->
+      element.innerHTML = 'ihre*seine '
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'seine '
+
+    it 'cleanses ein*e ', ->
+      element.innerHTML = 'ein*e '
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'eine '
+
+
   describe 'parseAndRewriteStrict', ->
     
     it 'removes *innen and _innen', ->
@@ -181,5 +212,8 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Eingeladen waren Vertreter des Justizministeriums'
 
-
+    it 'creates correct von Akteuren', ->
+      element.innerHTML = 'von Akteur*innen der Innenverkleidung'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'von Akteuren der Innenverkleidung'
 
