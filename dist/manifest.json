@@ -1,7 +1,7 @@
 {
   "name": "Neutrominator",
   "description": "Konvertiert Formen mit *innen und _innen u.ä. ins gewöhnliche Neutrum",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "permissions": [
     "activeTab",
     "storage"
