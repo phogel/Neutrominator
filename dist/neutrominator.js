@@ -118,6 +118,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.replaceIt(/(\sd|D)en ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen([a-z])/g, "$1en $2en $3er$4");
 	    this.replaceIt(/(\sd|D)en ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "$1en $2en $3ern");
 	    this.replaceIt(/(\sd|D)en ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "$1en $2en $3ren");
+	    this.replaceIt(/on ([a-zA-Z]*)r[\*_]innen/g, "on $1ren");
 	    this.replaceIt(/die ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "die $1en $2er");
 	    this.replaceIt(/(\sd|D)en ([a-zA-Z]*)er[\*_]innen/g, "$1en $2ern");
 	    this.replaceIt(/or[\*_]innen/g, "oren");
@@ -127,6 +128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.replaceIt(/f[\*_]innen/g, "fs");
 	    this.replaceIt(/[\*_]innen/g, "");
 	    this.replaceIt(/e[\*_]r/g, "er");
+	    this.replaceIt(/(\se|E)ine[\*_]r /g, "einer ");
 	    return this.defaultRewrite();
 	  };
 
@@ -135,7 +137,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.replaceIt(/[\*_]n([ ,.])/g, "n$1");
 	    this.replaceIt(/Studierenden/g, "Studenten");
 	    this.replaceIt(/Studierende/g, "Studentin");
-	    return this.replaceIt(/Studierender/g, "Student");
+	    this.replaceIt(/Studierender/g, "Student");
+	    this.replaceIt(/(\sd|D)er[\*_]diejenige/g, "$1erjenige");
+	    this.replaceIt(/(\sd|D)ie[\*_]derjenige/g, "$1erjenige");
+	    this.replaceIt(/(\se|E)ine[\*_]r /g, "$1iner ");
+	    this.replaceIt(/([eE])in[\*_]e /g, "$1ine ");
+	    this.replaceIt(/([sS])eine[\*_]ihre/g, "$1eine");
+	    this.replaceIt(/ihre[\*_]seine/g, "seine");
+	    return this.replaceIt(/Ihre[\*_]seine/g, "Seine");
 	  };
 
 	  Neutrominator.prototype.replaceIt = function(needle, term) {
