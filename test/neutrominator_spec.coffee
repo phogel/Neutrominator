@@ -186,6 +186,11 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Verleger '
 
+    it 'creates Spieler*in', ->
+      element.innerHTML = 'Spieler*in '
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Spieler '
+
       element.innerHTML = 'Suppenterr*ine'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Suppenterr*ine'
@@ -217,3 +222,52 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'von Akteuren der Innenverkleidung'
 
+    it 'creates correct die Studierende', ->
+      element.innerHTML = 'die Studierende, die Bier trinkt'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'die Studentin, die Bier trinkt'
+
+    it 'creates correct die studierende Biertrinkerin', ->
+      element.innerHTML = 'die studierende Biertrinkerin'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'die studierende Biertrinkerin'
+
+    it 'creates correct Studierende, ', ->
+      element.innerHTML = 'Studierende, die Bier trinken'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Studenten, die Bier trinken'
+
+    it 'creates correct Studierende, ', ->
+      element.innerHTML = 'Studierende.'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Studenten.'
+
+    it 'creates correct von Spieleren für Spieler.', ->
+      element.innerHTML = 'von Spieler*innen für Spieler*innen.'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'von Spielern für Spieler.'
+    
+    it 'creates correct von Geistern', ->
+      element.innerHTML = 'von Geister*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'von Geistern'
+
+    it 'creates correct den Zuhörern', ->
+      element.innerHTML = ' den Zuhörer*innen '
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual ' den Zuhörern '   
+
+    it 'creates correct Den Zuhörern', ->
+      element.innerHTML = 'Den Zuhörer*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Den Zuhörern'   
+
+    it 'creates correct gib den Freunden Zucker', ->
+      element.innerHTML = 'gib den Freund*innen Zucker'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'gib den Freunden Zucker'   
+
+    it 'creates correct sind Ratgeber und', ->
+      element.innerHTML = ' den Verlagen und arbeiten seit Jahren auf dem Weg zum fertigen Buch, sind Ratgeber*innen und manchmal auch Freund*innen'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual ' den Verlagen und arbeiten seit Jahren auf dem Weg zum fertigen Buch, sind Ratgeber und manchmal auch Freunde'

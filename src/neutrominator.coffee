@@ -25,15 +25,20 @@ class Neutrominator
   parseAndRewriteStrict: ->
     for lang in languagePrefixes
       @replaceIt new RegExp( lang + "[\*_]innen", "g" ), lang + "en"
-    @replaceIt /(\sd|D)en ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen([a-z])/g, "$1en $2en $3er$4"
-    @replaceIt /(\sd|D)en ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "$1en $2en $3ern"
-    @replaceIt /(\sd|D)en ([a-zA-Z]*)en ([\s\S]*)r[\*_]innen/g, "$1en $2en $3ren"
-    @replaceIt /on ([a-zA-Z]*)r[\*_]innen/g, "on $1ren"
-    @replaceIt /die ([a-zA-Z]*)en ([a-zA-Z]*)er[\*_]innen/g, "die $1en $2er"
-    @replaceIt /(\sd|D)en ([a-zA-Z]*)er[\*_]innen/g, "$1en $2ern"
+
+    @replaceIt /(\sd|D)en ([a-zA-ZßäöüÄÖÜ]*)en ([a-zA-ZßäöüÄÖÜ]*)er[\*_]innen([a-zßäöü])/g, "$1en $2en $3er$4"
+    @replaceIt /(\sd|D)en ([a-zA-ZßäöüÄÖÜ]*)en ([a-zA-ZßäöüÄÖÜ]*)er[\*_]innen/g, "$1en $2en $3ern"
+    @replaceIt /(\sd|D)en ([a-zA-ZßäöüÄÖÜ]*)en ([a-zA-ZßäöüÄÖÜ\s]*)r[\*_]innen/g, "$1en $2en $3ren"
+    @replaceIt /on ([a-zA-ZßäöüÄÖÜ]*)er[\*_]innen/g, "on $1ern"
+    @replaceIt /on ([a-zA-ZßäöüÄÖÜ]*)r[\*_]innen/g, "on $1ren"
+    @replaceIt /die ([a-zA-ZßäöüÄÖÜ]*)en ([a-zA-ZßäöüÄÖÜ]*)er[\*_]innen/g, "die $1en $2er"
+    @replaceIt /(\sd|D)en ([a-zA-ZäöüÄÖÜ]*)er[\*_]innen/g, "$1en $2ern"
     @replaceIt /or[\*_]innen/g, "oren"
     @replaceIt /er[\*_]innen/g, "er"
-    @replaceIt /([gtd])[\*_]innen/g, "$1en"
+    @replaceIt /([gt])[\*_]innen/g, "$1en"
+    @replaceIt /(\sd|D)en ([a-zA-ZäöüÄÖÜ]*)[\*_]innen/g, "$1en $2en"
+    @replaceIt /Freund[\*_]innen/g, "Freunde"
+    @replaceIt /d[\*_]innen/g, "den"
     @replaceIt /r[\*_]innen/g, "re"
     @replaceIt /f[\*_]innen/g, "fs"
     @replaceIt /[\*_]innen/g, ""
@@ -41,11 +46,15 @@ class Neutrominator
     @replaceIt /(\se|E)ine[\*_]r /g, "einer "
     @defaultRewrite()
 
+  replaceIt: (needle, term) ->
+    @haystack.innerHTML = @haystack.innerHTML.replace needle,term
+
   defaultRewrite: () ->
     @replaceIt /[\*_]in([ ,.])/g, "$1"
     @replaceIt /[\*_]n([ ,.])/g, "n$1"
     @replaceIt /Studierenden/g, "Studenten"
-    @replaceIt /Studierende/g, "Studentin"
+    @replaceIt /([eine|die]) Studierende/g, "$1 Studentin"
+    @replaceIt /Studierende/g, "Studenten"
     @replaceIt /Studierender/g, "Student"
     @replaceIt /(\sd|D)er[\*_]diejenige/g, "$1erjenige"
     @replaceIt /(\sd|D)ie[\*_]derjenige/g, "$1erjenige"
@@ -54,9 +63,6 @@ class Neutrominator
     @replaceIt /([sS])eine[\*_]ihre/g, "$1eine"
     @replaceIt /ihre[\*_]seine/g, "seine"
     @replaceIt /Ihre[\*_]seine/g, "Seine"
-
-  replaceIt: (needle, term) ->
-    @haystack.innerHTML = @haystack.innerHTML.replace needle,term
 
   getDativ: (noun) ->
     noun = noun.replace /ler[\*_]innen/g, "lern"
