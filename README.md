@@ -37,5 +37,4 @@ Some of the scripts might assume that `webpack` is installed and available on th
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/phogel/neutrominator.
-
+Errors in conversion can be in the `Issues` tab, preferably the full unconverted sentence. 
