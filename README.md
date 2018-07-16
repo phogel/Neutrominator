@@ -1,4 +1,4 @@
-# Neutrominator
+# Neutrominator [![Build Status](https://travis-ci.org/phogel/Neutrominator.svg?branch=master)](https://travis-ci.org/phogel/Neutrominator)
 
 Browser extension for Google Chrome that improves readability of gendered expressions in the German language, i.e. converts Leser*innen to Leser or LeserInnen dependant on user choice.
 
