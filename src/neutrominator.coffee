@@ -13,10 +13,7 @@ class Neutrominator
       if document.getElementsByTagName(tagName).length > 0
         for element in document.getElementsByTagName(tagName)
           @haystack = element
-          if @doStrict
-            @parseAndRewriteStrict()
-          else
-            @parseAndRewrite()
+          if @doStrict then @parseAndRewriteStrict() else @parseAndRewrite()
 
   parseAndRewrite: ->
     @replaceIt /[\*_]innen/g, "Innen"
@@ -38,6 +35,7 @@ class Neutrominator
     @replaceIt /([gt])[\*_]innen/g, "$1en"
     @replaceIt /(\sd|D)en ([a-zA-ZäöüÄÖÜ]*)[\*_]innen/g, "$1en $2en"
     @replaceIt /Freund[\*_]innen/g, "Freunde"
+    @replaceIt /Herr[\*_]innen/g, "Herren"
     @replaceIt /d[\*_]innen/g, "den"
     @replaceIt /r[\*_]innen/g, "re"
     @replaceIt /f[\*_]innen/g, "fs"
