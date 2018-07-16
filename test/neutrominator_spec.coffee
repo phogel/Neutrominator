@@ -265,7 +265,12 @@ describe 'Neutrominator', ->
     it 'creates correct gib den Freunden Zucker', ->
       element.innerHTML = 'gib den Freund*innen Zucker'
       cleanser.parseAndRewriteStrict()
-      expect(element.innerHTML).toEqual 'gib den Freunden Zucker'   
+      expect(element.innerHTML).toEqual 'gib den Freunden Zucker'
+
+    it 'creates correct Herr*innen', ->
+      element.innerHTML = 'Die Herr*innen des Abends'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Die Herren des Abends'  
 
     it 'creates correct sind Ratgeber und', ->
       element.innerHTML = ' den Verlagen und arbeiten seit Jahren auf dem Weg zum fertigen Buch, sind Ratgeber*innen und manchmal auch Freund*innen'
