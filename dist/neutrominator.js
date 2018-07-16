@@ -150,6 +150,7 @@ Neutrominator = (function() {
     this.replaceIt(/([gt])[\*_]innen/g, "$1en");
     this.replaceIt(/(\sd|D)en ([a-zA-ZäöüÄÖÜ]*)[\*_]innen/g, "$1en $2en");
     this.replaceIt(/Freund[\*_]innen/g, "Freunde");
+    this.replaceIt(/Herr[\*_]innen/g, "Herren");
     this.replaceIt(/d[\*_]innen/g, "den");
     this.replaceIt(/r[\*_]innen/g, "re");
     this.replaceIt(/f[\*_]innen/g, "fs");

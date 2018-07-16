@@ -1,6 +1,6 @@
 {
   "name": "Neutrominator",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Browser extension to cleanse words from gender-bias",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --single-run",
