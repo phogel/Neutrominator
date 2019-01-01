@@ -92,9 +92,9 @@ Neutrominator = (function() {
   class Neutrominator {
     constructor(doStrict = true) {
       this.doStrict = doStrict;
-      console.log('workit baby, ' + this.doStrict);
     }
 
+    //console.log 'workit baby, ' + @doStrict
     cleanText() {
       var element, i, len, results, tagName;
       results = [];
