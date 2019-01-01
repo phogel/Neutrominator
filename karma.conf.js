@@ -16,14 +16,14 @@ module.exports = function(config) {
     ],
 
     preprocessors: {
-        'test/*spec.coffee': ['webpack', 'sourcemap']
+      'test/*spec.coffee': ['webpack', 'sourcemap']
     },
 
     webpack: require('./webpack.config.js'),
 
     plugins: [
       require("karma-webpack"),
-      require("karma-phantomjs-launcher"),
+      require("karma-chrome-launcher"),
       require("karma-jasmine"),
       require("karma-jasmine-diff-reporter"),
       require("karma-sourcemap-loader")
@@ -54,7 +54,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
