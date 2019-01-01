@@ -41,10 +41,11 @@ class Neutrominator
     @replaceIt /f[\*_]innen/g, "fs"
     @replaceIt /[\*_]innen/g, ""
     @replaceIt /e[\*_]r/g, "er"
+    @replaceIt /einen[\*_]ihren/g, "einen"
     @replaceIt /(\se|E)ine[\*_]r /g, "einer "
     @defaultRewrite()
 
-  replaceIt: (needle, term) ->
+  replaceIt: (needle, term) -> 
     @haystack.innerHTML = @haystack.innerHTML.replace needle,term
 
   defaultRewrite: () ->

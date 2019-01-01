@@ -156,6 +156,7 @@ Neutrominator = (function() {
     this.replaceIt(/f[\*_]innen/g, "fs");
     this.replaceIt(/[\*_]innen/g, "");
     this.replaceIt(/e[\*_]r/g, "er");
+    this.replaceIt(/einen[\*_]ihren/g, "einen");
     this.replaceIt(/(\se|E)ine[\*_]r /g, "einer ");
     return this.defaultRewrite();
   };
