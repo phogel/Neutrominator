@@ -68,6 +68,19 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'eine '
 
+    it 'cleanses seinen*ihren', ->
+      element.innerHTML = ' seinen*ihren '
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual ' seinen '
+
+      element.innerHTML = 'Seinen*ihren'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Seinen'
+
+    it 'cleanses eines*r', ->
+      element.innerHTML = ' eines*r Deppen '
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual ' eines Deppen '
 
   describe 'parseAndRewriteStrict', ->
     
@@ -276,15 +289,5 @@ describe 'Neutrominator', ->
       element.innerHTML = ' den Verlagen und arbeiten seit Jahren auf dem Weg zum fertigen Buch, sind Ratgeber*innen und manchmal auch Freund*innen'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual ' den Verlagen und arbeiten seit Jahren auf dem Weg zum fertigen Buch, sind Ratgeber und manchmal auch Freunde'
-
-    it 'cleanses seinen*ihren', ->
-      element.innerHTML = ' seinen*ihren '
-      cleanser.parseAndRewriteStrict()
-      expect(element.innerHTML).toEqual ' seinen '
-
-      element.innerHTML = 'Seinen*ihren'
-      cleanser.parseAndRewriteStrict()
-      expect(element.innerHTML).toEqual 'Seinen'
-
 
 

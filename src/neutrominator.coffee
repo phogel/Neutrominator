@@ -41,7 +41,6 @@ class Neutrominator
     @replaceIt /f[\*_]innen/g, "fs"
     @replaceIt /[\*_]innen/g, ""
     @replaceIt /e[\*_]r/g, "er"
-    @replaceIt /einen[\*_]ihren/g, "einen"
     @replaceIt /(\se|E)ine[\*_]r /g, "einer "
     @defaultRewrite()
 
@@ -62,7 +61,9 @@ class Neutrominator
     @replaceIt /([sS])eine[\*_]ihre/g, "$1eine"
     @replaceIt /ihre[\*_]seine/g, "seine"
     @replaceIt /Ihre[\*_]seine/g, "Seine"
-
+    @replaceIt /einen[\*_]ihren/g, "einen"
+    @replaceIt /eines[\*_]r /g, "eines "
+    
   getDativ: (noun) ->
     noun = noun.replace /ler[\*_]innen/g, "lern"
     noun = noun.replace /er[\*_]innen/g, "ern"
