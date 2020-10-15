@@ -290,4 +290,20 @@ describe 'Neutrominator', ->
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual ' den Verlagen und arbeiten seit Jahren auf dem Weg zum fertigen Buch, sind Ratgeber und manchmal auch Freunde'
 
+    it 'creates correct kein anderer', ->
+      element.innerHTML = 'und wie kein*e andere*r persönlich'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'und wie kein anderer persönlich'
 
+    it 'removes dumb ass star from man*', ->
+      element.innerHTML = 'und man* sonst'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'und man sonst'
+      element.innerHTML = 'Man* hat was'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Man hat was'
+
+    it 'removes dumb ass : too', ->
+      element.innerHTML = 'Die Herr:innen des Abends'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Die Herren des Abends'  

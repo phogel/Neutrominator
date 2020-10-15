@@ -1,6 +1,6 @@
 {
   "name": "Neutrominator",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Browser extension to cleanse words from gender-bias",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --single-run",
@@ -11,18 +11,18 @@
   "license": "ISC",
   "devDependencies": {
     "coffee-loader": "^0.9.0",
-    "coffeescript": "^2.3.2",
+    "coffeescript": "^2.5.1",
     "jasmine-core": "^2.99.1",
     "karma": "^3.1.4",
     "karma-chrome-launcher": "^0.2.3",
     "karma-jasmine": "^0.3.6",
     "karma-jasmine-diff-reporter": "^0.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
-    "karma-sourcemap-loader": "^0.3.7",
+    "karma-sourcemap-loader": "^0.3.8",
     "karma-webpack": "^2.0.13",
     "phantomjs-prebuilt": "^2.1.16",
     "shelljs": "^0.5.3",
     "webpack": "^3.12.0",
-    "xtend": "^4.0.1"
+    "xtend": "^4.0.2"
   }
 }

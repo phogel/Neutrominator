@@ -1,6 +1,7 @@
 # Neutrominator [![Build Status](https://travis-ci.org/phogel/Neutrominator.svg?branch=master)](https://travis-ci.org/phogel/Neutrominator)
 
-Browser extension for Google Chrome that improves readability of gendered expressions in the German language, i.e. converts Leser*innen to Leser or LeserInnen dependant on user choice.
+A project to apply the power of regular expressions to linguistics.
+Browser extension for Google Chrome that improves readability of German texts by removing neologistic pseudo-expressions invented to damage the free spirit, technically converting Leser\*innen to Leser or LeserInnen, dependant on user choice.
 
 ## Development
 
@@ -28,7 +29,6 @@ Test files are found in `./tests` and can be executed by running
 
     npm test
 
-
 ### Common errors
 
 Some of the scripts might assume that `webpack` is installed and available on the `$PATH`. In case it can't be found, either fix your `$PATH` setup to include the binaries from your `node_modules` folder (`nvm` usually does this for you) or install `webpack`:
@@ -37,4 +37,4 @@ Some of the scripts might assume that `webpack` is installed and available on th
 
 ## Contributing
 
-Errors in conversion can be in the `Issues` tab, preferably the full unconverted sentence. 
+Errors in conversion can be in the `Issues` tab, preferably the full unconverted sentence.
