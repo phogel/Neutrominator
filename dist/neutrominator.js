@@ -132,8 +132,9 @@ Neutrominator = (function() {
       var i, lang, len;
       for (i = 0, len = languagePrefixes.length; i < len; i++) {
         lang = languagePrefixes[i];
-        this.replaceIt(new RegExp(lang + "[\*_]innen", "g"), lang + "en");
+        this.replaceIt(new RegExp(lang + "[\*:_]innen", "g"), lang + "en");
       }
+      this.replaceIt("kein*e andere*r", "kein anderer");
       this.replaceIt(/(\sd|D)en ([a-zA-ZßäöüÄÖÜ]*)en ([a-zA-ZßäöüÄÖÜ]*)er[\*_]innen([a-zßäöü])/g, "$1en $2en $3er$4");
       this.replaceIt(/(\sd|D)en ([a-zA-ZßäöüÄÖÜ]*)en ([a-zA-ZßäöüÄÖÜ]*)er[\*_]innen/g, "$1en $2en $3ern");
       this.replaceIt(/(\sd|D)en ([a-zA-ZßäöüÄÖÜ]*)en ([a-zA-ZßäöüÄÖÜ\s]*)r[\*_]innen/g, "$1en $2en $3ren");
@@ -141,19 +142,20 @@ Neutrominator = (function() {
       this.replaceIt(/on ([a-zA-ZßäöüÄÖÜ]*)r[\*_]innen/g, "on $1ren");
       this.replaceIt(/die ([a-zA-ZßäöüÄÖÜ]*)en ([a-zA-ZßäöüÄÖÜ]*)er[\*_]innen/g, "die $1en $2er");
       this.replaceIt(/(\sd|D)en ([a-zA-ZäöüÄÖÜ]*)er[\*_]innen/g, "$1en $2ern");
-      this.replaceIt(/or[\*_]innen/g, "oren");
-      this.replaceIt(/er[\*_]innen/g, "er");
-      this.replaceIt(/([gt])[\*_]innen/g, "$1en");
-      this.replaceIt(/(\sd|D)en ([a-zA-ZäöüÄÖÜ]*)[\*_]innen/g, "$1en $2en");
-      this.replaceIt(/Freund[\*_]innen/g, "Freunde");
-      this.replaceIt(/Herr[\*_]innen/g, "Herren");
-      this.replaceIt(/d[\*_]innen/g, "den");
-      this.replaceIt(/r[\*_]innen/g, "re");
-      this.replaceIt(/f[\*_]innen/g, "fs");
-      this.replaceIt(/[\*_]innen/g, "");
-      this.replaceIt(/e[\*_]r/g, "er");
-      this.replaceIt(/einen[\*_]ihren/g, "einen");
-      this.replaceIt(/(\se|E)ine[\*_]r /g, "einer ");
+      this.replaceIt(/or[\*:_]innen/g, "oren");
+      this.replaceIt(/er[\*:_]innen/g, "er");
+      this.replaceIt(/([gt])[\*:_]innen/g, "$1en");
+      this.replaceIt(/(\sd|D)en ([a-zA-ZäöüÄÖÜ]*)[\*:_]innen/g, "$1en $2en");
+      this.replaceIt(/Freund[\*:_]innen/g, "Freunde");
+      this.replaceIt(/Herr[\*:_]innen/g, "Herren");
+      this.replaceIt(/d[\*:_]innen/g, "den");
+      this.replaceIt(/r[\*:_]innen/g, "re");
+      this.replaceIt(/f[\*:_]innen/g, "fs");
+      this.replaceIt(/[\*:_]innen/g, "");
+      this.replaceIt(/e[\*:_]r/g, "er");
+      this.replaceIt(/man\*/g, "man");
+      this.replaceIt(/Man\*/g, "Man");
+      this.replaceIt(/(\se|E)ine[\*:_]r /g, "einer ");
       return this.defaultRewrite();
     }
 
@@ -162,26 +164,28 @@ Neutrominator = (function() {
     }
 
     defaultRewrite() {
-      this.replaceIt(/[\*_]in([ ,.])/g, "$1");
-      this.replaceIt(/[\*_]n([ ,.])/g, "n$1");
+      this.replaceIt(/[\*:_]in([ ,.])/g, "$1");
+      this.replaceIt(/[\*:_]n([ ,.])/g, "n$1");
       this.replaceIt(/Studierenden/g, "Studenten");
       this.replaceIt(/([eine|die]) Studierende/g, "$1 Studentin");
       this.replaceIt(/Studierende/g, "Studenten");
       this.replaceIt(/Studierender/g, "Student");
-      this.replaceIt(/(\sd|D)er[\*_]diejenige/g, "$1erjenige");
-      this.replaceIt(/(\sd|D)ie[\*_]derjenige/g, "$1erjenige");
-      this.replaceIt(/(\se|E)ine[\*_]r /g, "$1iner ");
-      this.replaceIt(/([eE])in[\*_]e /g, "$1ine ");
-      this.replaceIt(/([sS])eine[\*_]ihre/g, "$1eine");
-      this.replaceIt(/ihre[\*_]seine/g, "seine");
-      return this.replaceIt(/Ihre[\*_]seine/g, "Seine");
+      this.replaceIt(/(\sd|D)er[\*:_]diejenige/g, "$1erjenige");
+      this.replaceIt(/(\sd|D)ie[\*:_]derjenige/g, "$1erjenige");
+      this.replaceIt(/(\se|E)ine[\*:_]r /g, "$1iner ");
+      this.replaceIt(/([eE])in[\*:_]e /g, "$1ine ");
+      this.replaceIt(/([sS])eine[\*:_]ihre/g, "$1eine");
+      this.replaceIt(/ihre[\*:_]seine/g, "seine");
+      this.replaceIt(/Ihre[\*:_]seine/g, "Seine");
+      this.replaceIt(/einen[\*:_]ihren/g, "einen");
+      return this.replaceIt(/eines[\*:_]r /g, "eines ");
     }
 
     getDativ(noun) {
-      noun = noun.replace(/ler[\*_]innen/g, "lern");
-      noun = noun.replace(/er[\*_]innen/g, "ern");
-      noun = noun.replace(/r[\*_]innen/g, "rn");
-      noun = noun.replace(/[\*_]innen/g, "n");
+      noun = noun.replace(/ler[\*:_]innen/g, "lern");
+      noun = noun.replace(/er[\*:_]innen/g, "ern");
+      noun = noun.replace(/r[\*:_]innen/g, "rn");
+      noun = noun.replace(/[\*:_]innen/g, "n");
       return noun;
     }
 
