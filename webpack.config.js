@@ -1,19 +1,21 @@
-var path = require('path');
+const path = require("path");
 
 module.exports = {
-    entry: [
-        path.join(__dirname, 'src', 'neutrominator.coffee')
-    ], 
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: "neutrominator.js",
-        library: 'Neutrominator',
-        libraryTarget: 'umd'
-    },
-    module: {
-        loaders: [
-            { test: /\.coffee$/, loader: "coffee-loader" }
-        ]
-    }
+  entry: {
+    neutrominator: path.join(__dirname, "src", "neutrominator.coffee"),
+    popup: path.join(__dirname, "src", "popup.coffee"),
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
+  },
+  mode: "production",
+  module: {
+    rules: [
+      {
+        test: /\.coffee$/,
+        loader: "coffee-loader",
+      },
+    ],
+  },
 };
-
