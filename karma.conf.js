@@ -1,77 +1,67 @@
-module.exports = function(config) {
+module.exports = function (config) {
   let configuration = {
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-
+    basePath: "",
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
-
+    frameworks: ["jasmine"],
 
     // list of files / patterns to load in the browser
-    files: [
-      'test/*spec.coffee'
-    ],
+    files: ["test/*spec.coffee"],
 
     preprocessors: {
-      'test/*spec.coffee': ['webpack', 'sourcemap']
+      "test/*spec.coffee": ["webpack"],
     },
 
-    webpack: require('./webpack.config.js'),
+    webpack: require("./webpack.config.js"),
 
     plugins: [
       require("karma-webpack"),
       require("karma-chrome-launcher"),
       require("karma-jasmine"),
       require("karma-jasmine-diff-reporter"),
-      require("karma-sourcemap-loader")
+      require("karma-sourcemap-loader"),
     ],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['jasmine-diff', 'progress'],
-
+    reporters: ["jasmine-diff", "progress"],
 
     // web server port
     port: 9876,
 
-
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_ERROR,
 
-
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
-    
+    browsers: ["Chrome"],
+
     customLaunchers: {
       Chrome_travis_ci: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
+        base: "Chrome",
+        flags: ["--no-sandbox"],
+      },
     },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false,
   };
 
-  if(process.env.TRAVIS){
-    configuration.browsers = ['Chrome_travis_ci'];
+  if (process.env.TRAVIS) {
+    configuration.browsers = ["Chrome_travis_ci"];
     configuration.singleRun = true;
   }
 
   config.set(configuration);
-}
+};
