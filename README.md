@@ -1,4 +1,4 @@
-# Neutrominator [![Build Status](https://travis-ci.org/phogel/Neutrominator.svg?branch=master)](https://travis-ci.org/phogel/Neutrominator)
+# Neutrominator
 
 A project to apply the power of regular expressions to linguistics.
 Browser extension for Google Chrome that improves readability of German texts by removing neologistic pseudo-expressions invented to damage the free spirit, technically converting Leser\*innen to Leser or LeserInnen, dependant on user choice.
