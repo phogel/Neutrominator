@@ -307,3 +307,8 @@ describe 'Neutrominator', ->
       element.innerHTML = 'Die Herr:innen des Abends'
       cleanser.parseAndRewriteStrict()
       expect(element.innerHTML).toEqual 'Die Herren des Abends'  
+
+    it 'works with shy html tag', ->
+      element.innerHTML = 'Die Schüle&shy;r*in&shy;nen.'
+      cleanser.parseAndRewriteStrict()
+      expect(element.innerHTML).toEqual 'Die Schüler.'

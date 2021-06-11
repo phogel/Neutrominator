@@ -16,7 +16,7 @@ class Neutrominator
           if @doStrict then @parseAndRewriteStrict() else @parseAndRewrite()
 
   parseAndRewrite: ->
-    @replaceIt /[\*_]innen/g, "Innen"
+    @replaceIt /[\*:_]innen/g, "Innen"
     @defaultRewrite()
 
   parseAndRewriteStrict: ->
@@ -66,6 +66,7 @@ class Neutrominator
     @replaceIt /Ihre[\*:_]seine/g, "Seine"
     @replaceIt /einen[\*:_]ihren/g, "einen"
     @replaceIt /eines[\*:_]r /g, "eines "
+    @replaceIt /&shy;r[\*:_]in&shy;nen/g, "r"
     
   getDativ: (noun) ->
     noun = noun.replace /ler[\*:_]innen/g, "lern"
